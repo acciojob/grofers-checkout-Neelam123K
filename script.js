@@ -13,7 +13,7 @@ const getSum = () => {
 
     let existingTotalRow = document.querySelector("#totalRow");
     if (existingTotalRow) {
-        existingTotalRow.textContent = `Total Price: $${total}`;
+        existingTotalRow.first.textContent = `Total Price: $${total}`;
     } else {
         const totalRow = document.createElement('tr');
         totalRow.id = "totalRow"; // Set an id to identify the total row
