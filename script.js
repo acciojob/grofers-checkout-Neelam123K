@@ -11,9 +11,8 @@ const getSum = () => {
         total += parseFloat(priceElement.textContent) || 0; 
     });
 
-    let existingTotalRow = document.querySelector(".total-row");
-    if (existingTotalRow) {
-        existingTotalRow.firstElementChild.textContent = `Total Prices: $${total.toFixed(2)}`;
+       if (existingTotalRow) {
+        existingTotalRow.querySelector('td').textContent = `Total Prices: $${total.toFixed(2)}`;
     } else {
         const totalRow = document.createElement('tr');
         totalRow.classList.add("total-row");
@@ -23,8 +22,12 @@ const getSum = () => {
         totalCell.textContent = `Total Prices: $${total.toFixed(2)}`;
         totalRow.appendChild(totalCell);
 
-        document.getElementById('groceryTable').appendChild(totalRow);
-    }
+        const groceryTable = document.getElementById('groceryTable');
+        if (groceryTable) {
+            groceryTable.appendChild(totalRow);
+        } else {
+            console.error("Table with ID 'groceryTable' not found!");
+        }
   
 };
 
