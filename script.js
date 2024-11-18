@@ -4,32 +4,26 @@ document.body.appendChild(getSumBtn);
 
 const getSum = () => {
 //Add your code here
-	const prices = document.querySelectorAll('.prices');
-    let total = 0;
+const prices=document.getElementsByClassName('price');
+const pricesArr=Array.from(prices);
+let sum=0;
+pricesArr.forEach((elm)=>{
+    // console.log(typeof Number(elm.innerText)) 
+    sum+=Number(elm.innerText);
+})
 
-    prices.forEach(priceElement => {
-        total += parseFloat(priceElement.textContent) || 0; 
-    });
+  const table=document.getElementsByTagName('table')[0];
 
-       if (existingTotalRow) {
-        existingTotalRow.querySelector('td').textContent = `Total Prices: $${total.toFixed(2)}`;
-    } else {
-        const totalRow = document.createElement('tr');
-        totalRow.classList.add("total-row");
+  const tr=document.createElement('tr');
+  const td=document.createElement('td');
 
-        const totalCell = document.createElement('td');
-        totalCell.colSpan = 2; 
-        totalCell.textContent = `Total Prices: $${total.toFixed(2)}`;
-        totalRow.appendChild(totalCell);
+  td.innerText=`Total Price = ${sum}`;
+  td.colSpan='2';
+	td.id='ans';
+//   td.style.textAlign='justify';
+  tr.append(td);
+  table.append(tr);
 
-        const groceryTable = document.getElementById('groceryTable');
-        if (groceryTable) {
-            groceryTable.appendChild(totalRow);
-        } else {
-            console.error("Table with ID 'groceryTable' not found!");
-        }
-  
 };
 
 getSumBtn.addEventListener("click", getSum);
-
