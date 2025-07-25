@@ -3,35 +3,34 @@ getSumBtn.append("Get Total Price");
 document.body.appendChild(getSumBtn);
 
 const getSum = () => {
-	//write your code
-  const existingTotal = document.getElementById("total-row");
-  if (existingTotal) {
-    existingTotal.remove();
-  }
+  // Remove previous total row if any
+  const oldRow = document.getElementById("total-row");
+  if (oldRow) oldRow.remove();
 
-  const prices = document.querySelectorAll(".price");
-
+  // Get all prices
+  const priceElements = document.querySelectorAll(".price");
   let total = 0;
-  prices.forEach(priceCell => {
-    const price = parseFloat(priceCell.textContent);
-    if (!isNaN(price)) {
-      total += price;
-    }
+  priceElements.forEach((el) => {
+    total += parseFloat(el.textContent);
   });
 
-  const totalRow = document.createElement("tr");
-  totalRow.id = "total-row";
+  // Create new row
+  const newRow = document.createElement("tr");
+  newRow.id = "total-row";
 
-  const totalCell = document.createElement("td");
-  totalCell.colSpan = 2;
-  totalCell.textContent = `Total Price: ₹${total}`;
-  totalCell.style.fontWeight = "bold";
-  totalCell.style.textAlign = "right";
+  const td = document.createElement("td");
+  td.colSpan = 2;
 
-  totalRow.appendChild(totalCell);
+  // ✅ Set the required #ans element
+  const span = document.createElement("span");
+  span.id = "ans";
+  span.textContent = `Total Price: ₹${total}`;
+  td.appendChild(span);
+
+  newRow.appendChild(td);
 
   const table = document.querySelector("table");
-  table.appendChild(totalRow);
+  table.appendChild(newRow);
 };
 
 getSumBtn.addEventListener("click", getSum);
